@@ -13,30 +13,17 @@
      
       
       <form method="GET">
-      ПРОЦЕСОР INTEL CORE™ I5 10400F (BX8070110400F)
+        
       {% for price in prices%}
       <ul>
         <li>
           {%if price%}
-          <a>            
-            ID:{{price.id}}
-            {%if price.brain_price%}
-            Brain_price:  {{price.brain_price}} UAH   Checked at {{price.created_at.date()}}
+          <a>           
+            ID:{{price.id}} Source: {{price.sourse}}, Device: {{price.device}}, Price: {{price.price}} UAH,   Checked at {{price.checked.date()}}
             {% endif %}
-            {%if price.telemart_price%}
-            Telemart_price:  {{price.telemart_price}}UAH   Checked at {{price.created_at.date()}}
-            {% endif %}
-            {%if price.compx_price%}
-            Compx_price:  {{price.compx_price}} UAH   Checked at {{price.created_at.date()}}
-            {% endif %}
-          </a>
-
-         
-          {% endif %}
+          </a>     
         </li>
       </ul>
-      
-     
       {% endfor %}
       </form> 
     </main>

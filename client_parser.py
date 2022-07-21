@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import sqlite3
 
+DEVICE="Procesor_INTEL_Core_i5_10400F"
 brain = "https://brain.com.ua/ukr/Procesor_INTEL_Core_i5_10400F_BX8070110400F-p688386.html"
 telemart = "https://telemart.ua/ua/products/intel-core-i5-10400f-2943ghz-s1200-box/?gclid=CjwKCAjwrNmWBhA4EiwAHbjEQJsb65-GxmbV4Pi-4u_wnJs8mocp5N9tOQ3NnGbkOMOR-M8TBAhkghoCVB0QAvD_BwE"
 compx = "https://compx.com.ua/ru/protsessor-intel-core-i5-10400f-bx8070110400f/"
@@ -21,9 +22,9 @@ async def brain_parser(url):
             print(f"Brain price: {int(price)}")
             with sqlite3.connect('prices.db') as con:
                 cur = con.cursor()
-                sql_to_brain = """INSERT INTO prices(brain_price)
-                    VALUES (?)"""
-                cur.execute(sql_to_brain, [int(price), ])
+                sql_to_prices = """INSERT INTO prices(sourse, device, price)
+                    VALUES (?, ?, ?)"""
+                cur.execute(sql_to_prices, ["Brain", DEVICE, int(price)])
                 con.commit()
 
 async def telemart_parser(url):
@@ -40,9 +41,9 @@ async def telemart_parser(url):
             print(f"Telemart price: {int(a[1])}")
             with sqlite3.connect('prices.db') as con:
                 cur = con.cursor()
-                sql_to_brain = """INSERT INTO prices(telemart_price)
-                    VALUES (?)"""
-                cur.execute(sql_to_brain, [int(a[1]), ])
+                sql_to_prices = """INSERT INTO prices(sourse, device, price)
+                    VALUES (?, ?, ?)"""
+                cur.execute(sql_to_prices, ["Telemart", DEVICE, int(a[1])])
                 con.commit()
 
 
@@ -60,9 +61,9 @@ async def compx_parser(url):
             print(f"Compx price: {int(a[1])}")
             with sqlite3.connect('prices.db') as con:
                 cur = con.cursor()
-                sql_to_brain = """INSERT INTO prices(compx_price)
-                    VALUES (?)"""
-                cur.execute(sql_to_brain, [int(a[1]), ])
+                sql_to_prices = """INSERT INTO prices(sourse, device, price)
+                    VALUES (?, ?, ?)"""
+                cur.execute(sql_to_prices, ["Compx", DEVICE, int(a[1])])
                 con.commit()            
 
 

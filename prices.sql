@@ -1,11 +1,10 @@
 DROP TABLE IF EXISTS prices;
 CREATE TABLE prices (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    brain_price INT(6),  
-    telemart_price INT(6), 
-    compx_price INT(6),    
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
+    sourse VARCHAR(20) NOT NULL,  
+    device VARCHAR(50) NOT NULL, 
+    price INT(6),    
+    checked TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
